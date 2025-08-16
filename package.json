@@ -1,0 +1,23 @@
+{
+  "name": "restaurant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkobirCoder/Restaurant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkobirCoder/Restaurant/issues"
+  },
+  "homepage": "https://github.com/AkobirCoder/Restaurant#readme",
+  "dependencies": {
+    "dotenv": "^17.2.1"
+  }
+}

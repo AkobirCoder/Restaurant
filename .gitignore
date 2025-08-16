@@ -1,0 +1,5 @@
+# noda modules
+node_modules/
+
+# environment files
+.env
