@@ -377,12 +377,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		// Form:
 
-		// dotenv.config();
-
-		const form = document.querySelector('form'),
-			telegram_token_bot = '8412748328:AAE04CUQA-93MzC1XOJ13vJrjvENZHRUz6k',
-			chatID = '7491858572';
-		// const {TELEGRAM_TOKEN_BOT, CHAT_ID} = process.env;
+		const form = document.querySelector('form');
+			// telegram_token_bot = '8412748328:AAE04CUQA-93MzC1XOJ13vJrjvENZHRUz6k',
+			// chatID = '7491858572';
 		
 		const message = {
 			loading: 'Loading...',
@@ -410,13 +407,17 @@ window.addEventListener('DOMContentLoaded', () => {
 				formObject[key] = value;
 			});
 
-			fetch(`https://api.telegram.org/bot${telegram_token_bot}/sendMessage`, {
+			// fetch(`https://api.telegram.org/bot${telegram_token_bot}/sendMessage`, {
+			fetch('http://localhost:5000/send-message', {
 				method: 'POST',
 				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify({
-					chat_id: chatID,
-					text: `Fullname: ${formObject.name}, Phone number: ${formObject.phone}`,
-				}),
+				body: JSON.stringify(
+					// {
+					// 	chat_id: chatID,
+					// 	text: `Fullname: ${formObject.name}, Phone number: ${formObject.phone}`,
+					// }
+					formObject
+				),
 			})
 			.then(() => {
 				setTimeout(() => {
