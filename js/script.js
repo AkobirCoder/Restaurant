@@ -1,9 +1,5 @@
 // Bismillahir rohmanir rohim...
 
-// import dotenv from 'dotenv';
-// import { eventNames } from 'process';
-// import { FormData } from 'undici-types';
-
 window.addEventListener('DOMContentLoaded', () => {
 
 	// Tabs:
@@ -40,9 +36,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 						showTabContent(index);
 					}
-				})
+				});
 			}
-		})
+		});
 
 		hideTabContents();
 
@@ -52,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	__tabs();
 
 
-	// Loader: 
+	// Loader:
 
 	function __loader() {
 		const loaderWrapper = document.querySelector('.loader-wrapper');
@@ -140,9 +136,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	function __class() {
 
-		// Class - Offers:
-
-		class OffersMenu {
+		// Class - SpecialOffers:
+		class SpecialOffer {
 			constructor(
 				src,
 				alt,
@@ -163,8 +158,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 
 			formatToUSD() {
-				this.discount = this.discount.toLocaleString('en-US', {style:'currency', currency:'USD'});
-				this.sale = this.sale.toLocaleString('en-US', {style:'currency', currency:'USD'});
+				this.discount = this.discount.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+				this.sale = this.sale.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
 			}
 
 			render() {
@@ -173,7 +168,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				element.innerHTML = `
 					<img src=${this.src} alt=${this.alt}>
 					<div>
-						<h3>${this.title}</h3>
+					<h3>${this.title}</h3>
 						<p>${this.description}</p>
 						<p><del>${this.discount}</del> <span class="primary-text">${this.sale}</span></p>
 					</div>
@@ -183,47 +178,252 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		const offers = [
-			{
-				src: './img/offer1.png',
-				alt: 'Quattro Pasta',
-				title: 'Quattro Pasta',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
-				discount: 55,
-				sale: 25,
-			},
-			{
-				src: './img/offer2.png',
-				alt: 'Vegertarian Pasta',
-				title: 'Vegertarian Pasta',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
-				discount: 65,
-				sale: 35,
-			},
-			{
-				src: './img/offer3.png',
-				alt: 'Gluten-Free Pasta',
-				title: 'Gluten-Free Pasta',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
-				discount: 35,
-				sale: 15,
-			},
-		];
+		// const specialOffers = [
+		// 	{
+		// 		src: './img/offer1.png',
+		// 		alt: 'Quattro Pasta',
+		// 		title: 'Quattro Pasta',
+		// 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+		// 		discount: 55,
+		// 		sale: 25,
+		// 	},
+		// 	{
+		// 		src: './img/offer2.png',
+		// 		alt: 'Vegertarian Pasta',
+		// 		title: 'Vegertarian Pasta',
+		// 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+		// 		discount: 65,
+		// 		sale: 35,
+		// 	},
+		// 	{
+		// 		src: './img/offer3.png',
+		// 		alt: 'Gluten-Free Pasta',
+		// 		title: 'Gluten-Free Pasta',
+		// 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+		// 		discount: 35,
+		// 		sale: 15,
+		// 	},
+		// ];
 
-		offers.forEach(offer => {
-			new OffersMenu(
-				offer.src,
-				offer.alt,
-				offer.title,
-				offer.description,
-				offer.discount,
-				offer.sale,
-				'.offers-items'
-			).render();
+		// specialOffers.forEach(specialOffer => {
+		// 	const {src, alt, title, description, discount, sale} = specialOffer;
+
+		// 	new SpecialOffer(
+		// 		src,
+		// 		alt,
+		// 		title,
+		// 		description,
+		// 		discount,
+		// 		sale,
+		// 		'.offers-items'
+		// 	).render();
+		// });
+
+		// specialOffers: PORT - 3013
+
+		const specialOffers__URL = 'http://localhost:3013/specialOffers';
+
+		fetch(specialOffers__URL, {
+			method: 'GET',
+			headers: {'Content-Type': 'application/json'},
+		}).then(response => {
+			return response.json();
+		}).then(data => {
+			data.forEach(specialOffer => {
+				const {src, alt, title, description, discount, sale} = specialOffer;
+
+				new SpecialOffer(
+					src,
+					alt,
+					title,
+					description,
+					discount,
+					sale,
+					'.offers-items'
+				).render();
+			});
 		});
 
 
-		// Class - DayTimes:
+		// Class - SpecialMenu:
+
+		class SpecialMenu {
+			constructor(
+				src,
+				alt,
+				title,
+				description,
+				price,
+				parentSelector
+			) {
+				this.src = src;
+				this.alt = alt;
+				this.title = title;
+				this.description = description;
+				this.price = price;
+				this.parentSelector = document.querySelector(parentSelector);
+				this.formatToUSD();
+			}
+
+			formatToUSD() {
+				this.price = this.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+			}
+
+			render() {
+				const element = document.createElement('div');
+
+				element.classList.add('menu-item');
+
+				element.innerHTML = `
+					<img src=${this.src} alt=${this.alt}>
+					<div>
+						<h3>${this.title} <span class="primary-text">${this.price}</span></h3>
+						<p>${this.description}</p>
+					</div>
+				`;
+
+				this.parentSelector.append(element);
+			}
+		}
+
+		// const specialMenuItems = [
+		// 	{
+		// 		src: './img/food1.png',
+		// 		alt: 'LASAL Cheese',
+		// 		title: 'LASAL Cheese',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 18,
+		// 		parentSelector: '.menu-items-left',
+		// 	},
+		// 	{
+		// 		src: './img/food2.png',
+		// 		alt: 'JUMBO CRAB SHRIMP',
+		// 		title: 'JUMBO CRAB SHRIMP',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 24,
+		// 		parentSelector: '.menu-items-left',
+		// 	},
+		// 	{
+		// 		src: './img/food3.png',
+		// 		alt: 'KOKTAIL JUCIE',
+		// 		title: 'KOKTAIL JUCIE',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 12,
+		// 		parentSelector: '.menu-items-left',
+		// 	},
+		// 	{
+		// 		src: './img/food4.png',
+		// 		alt: 'CAPO STEAK',
+		// 		title: 'CAPO STEAK',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 60,
+		// 		parentSelector: '.menu-items-left',
+		// 	},
+		// 	{
+		// 		src: './img/food5.png',
+		// 		alt: 'ORGANIC FRUIT SALAD',
+		// 		title: 'ORGANIC FRUIT SALAD',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 8,
+		// 		parentSelector: '.menu-items-left',
+		// 	},
+		// 	{
+		// 		src: './img/food6.png',
+		// 		alt: 'CHEESE PIZZA',
+		// 		title: 'CHEESE PIZZA',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 18,
+		// 		parentSelector: '.menu-items-left',
+		// 	},
+		// 	{
+		// 		src: './img/food7.jpeg',
+		// 		alt: 'KOFTA MEAT',
+		// 		title: 'KOFTA MEAT',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 40,
+		// 		parentSelector: '.menu-items-right',
+		// 	},
+		// 	{
+		// 		src: './img/food8.jpeg',
+		// 		alt: 'SPANISH PIES',
+		// 		title: 'SPANISH PIES',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 14,
+		// 		parentSelector: '.menu-items-right',
+		// 	},
+		// 	{
+		// 		src: './img/food9.jpeg',
+		// 		alt: 'CHEESE TOST',
+		// 		title: 'CHEESE TOST',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 6,
+		// 		parentSelector: '.menu-items-right',
+		// 	},
+		// 	{
+		// 		src: './img/food10.jpeg',
+		// 		alt: 'FRUIT SALAD',
+		// 		title: 'FRUIT SALAD',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 14,
+		// 		parentSelector: '.menu-items-right',
+		// 	},
+		// 	{
+		// 		src: './img/food11.jpeg',
+		// 		alt: 'CHICKEN SHAWARMA',
+		// 		title: 'CHICKEN SHAWARMA',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 20,
+		// 		parentSelector: '.menu-items-right',
+		// 	},
+		// 	{
+		// 		src: './img/food12.jpeg',
+		// 		alt: 'MEGA CHEESE PIZZA',
+		// 		title: 'MEGA CHEESE PIZZA',
+		// 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+		// 		price: 30,
+		// 		parentSelector: '.menu-items-right',
+		// 	},
+		// ];
+
+		// specialMenuItems.forEach(specialMenuItem => {
+		// 	const {src, alt, title, description, price, parentSelector} = specialMenuItem;
+
+		// 	new SpecialMenu(
+		// 		src,
+		// 		alt,
+		// 		title,
+		// 		description,
+		// 		price,
+		// 		parentSelector
+		// 	).render();
+		// });
+
+		// specialMenuItems: PORT - 3014
+
+		const specialMenuItems__URL = 'http://localhost:3014/specialMenuItems';
+
+		fetch(specialMenuItems__URL, {
+			method: 'GET',
+			headers: {'Content-Type': 'application/json'},
+		}).then(response => {
+			return response.json();
+		}).then(data => {
+			data.forEach(specialMenuItem => {
+				const {src, alt, title, description, price, parentSelector} = specialMenuItem;
+
+				new SpecialMenu(
+					src,
+					alt,
+					title,
+					description,
+					price,
+					parentSelector
+				).render();
+			});
+		});
+
+
+		// Class - DayTime:
 
 		class DayTime {
 			constructor(
@@ -232,7 +432,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				title,
 				description,
 				startTime,
-				endTime,
+				endtime,
 				parentSelector
 			) {
 				this.src = src;
@@ -240,20 +440,20 @@ window.addEventListener('DOMContentLoaded', () => {
 				this.title = title;
 				this.description = description;
 				this.startTime = startTime;
-				this.endTime = endTime;
+				this.endtime = endtime;
 				this.parentSelector = document.querySelector(parentSelector);
 				this.formatTime();
 			}
 
 			formatTime(hour) {
-				if (hour === undefined || hour === null){
+				if (hour === undefined || hour === null) {
 					return '';
 				}
 
 				const period = hour >= 12 ? 'pm' : 'am',
-					formattedHour = hour % 12 === 0 ? hour : hour % 12;
+					formattedHour = hour % 12 === 0 ? 12 : hour % 12;
 
-				return `${formattedHour}: 00 ${period}`;
+				return `${formattedHour}:00 ${period}`;
 			}
 
 			render() {
@@ -266,12 +466,12 @@ window.addEventListener('DOMContentLoaded', () => {
 				if (this.description) {
 					timeText = this.description;
 				} else {
-					timeText = `${this.formatTime(this.startTime)} to ${this.formatTime(this.endTime)}`;
+					timeText = `${this.formatTime(this.startTime)} to ${this.formatTime(this.endtime)}`;
 				}
 
 				element.innerHTML = `
 					<img src=${this.src} alt=${this.alt}>
-					<h3>${this.description}</h3>
+					<h3>${this.title}</h3>
 					<p>${timeText}</p>
 				`;
 
@@ -279,57 +479,85 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		const days = [
-			{
-				src: './img/breckfastIcon.png',
-				alt: 'Breakfast',
-				title: 'Breakfast',
-				startTime: 8,
-				endTime: 10,
-			},
-			{
-				src: './img/lunchIcon.png',
-				alt: 'Lunch',
-				title: 'Lunch',
-				startTime: 16,
-				endTime: 19,
-			},
-			{
-				src: './img/dinnerIcon.png',
-				alt: 'Dinner',
-				title: 'Dinner',
-				startTime: 21,
-				endTime: 1,
-			},
-			{
-				src: './img/breckfastIcon.png',
-				alt: 'Breakfast',
-				title: 'Breakfast',
-				description: 'All day',
-			},
-		];
+		// const dayTimes = [
+		// 	{
+		// 		src: './img/breckfastIcon.png',
+		// 		alt: 'Breakfast',
+		// 		title: 'Breakfast',
+		// 		startTime: 8,
+		// 		endtime: 10,
+		// 	},
+		// 	{
+		// 		src: './img/lunchIcon.png',
+		// 		alt: 'Lunch',
+		// 		title: 'Lunch',
+		// 		startTime: 16,
+		// 		endtime: 19,
+		// 	},
+		// 	{
+		// 		src: './img/dinnerIcon.png',
+		// 		alt: 'Dinner',
+		// 		title: 'Dinner',
+		// 		startTime: 21,
+		// 		endtime: 1,
+		// 	},
+		// 	{
+		// 		src: './img/dessertIcon.png',
+		// 		alt: 'Dessert',
+		// 		title: 'Dessert',
+		// 		description: 'All day',
+		// 	},
+		// ];
 
-		days.forEach(day => {
-			new DayTime(
-				day.src,
-				day.alt,
-				day.title,
-				day.description,
-				day.startTime,
-				day.endTime,
-				'.daytime-items',
-			).render();
+		// dayTimes.forEach(dayTime => {
+		// 	const {src, alt, title, description, startTime, endtime} = dayTime;
+
+		// 	new DayTime(
+		// 		src,
+		// 		alt,
+		// 		title,
+		// 		description,
+		// 		startTime,
+		// 		endtime,
+		// 		'.daytime-items'
+		// 	).render();
+		// });
+
+		// dayTimes: PORT - 3015
+
+		const dayTimes__URL = 'http://localhost:3015/dayTimes';
+
+		fetch(dayTimes__URL, {
+			method: 'GET',
+			headers: {'Content-Type': 'application/json'},
+		}).then(response => {
+			return response.json();
+		}).then(data => {
+			data.forEach(dayTime => {
+				const {src, alt, title, description, startTime, endtime} = dayTime;
+
+				new DayTime(
+					src,
+					alt,
+					title,
+					description,
+					startTime,
+					endtime,
+					'.daytime-items'
+				).render();
+			});
 		});
 	}
 
 	__class();
 
 
-	// Modal and Form:
+	// Modal && Form:
 
 	function __modal__form() {
 
 		// Modal:
+
 		const modal = document.querySelector('.modal'),
 			modalContent = document.querySelector('.modal__content'),
 			modalOpenBtns = document.querySelectorAll('[data-modal]');
@@ -348,8 +576,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 
 		function closeModal() {
-			modal.classList.add('hide');
 			modal.classList.remove('show');
+			modal.classList.add('hide');
 			modalContent.classList.remove('modal__fade');
 			document.body.style.overflow = '';
 		}
@@ -378,11 +606,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		// Form:
 
 		const form = document.querySelector('form');
-			// telegram_token_bot = '8412748328:AAE04CUQA-93MzC1XOJ13vJrjvENZHRUz6k',
-			// chatID = '7491858572';
-		
+
 		const message = {
-			loading: 'Loading...',
+			loading: 'Loading..',
 			success: 'Thanks for contacting with us',
 			failure: 'Something went wrong',
 		}
@@ -407,17 +633,10 @@ window.addEventListener('DOMContentLoaded', () => {
 				formObject[key] = value;
 			});
 
-			// fetch(`https://api.telegram.org/bot${telegram_token_bot}/sendMessage`, {
 			fetch('http://localhost:5000/send-message', {
 				method: 'POST',
 				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify(
-					// {
-					// 	chat_id: chatID,
-					// 	text: `Fullname: ${formObject.name}, Phone number: ${formObject.phone}`,
-					// }
-					formObject
-				),
+				body: JSON.stringify(formObject),
 			})
 			.then(() => {
 				setTimeout(() => {
