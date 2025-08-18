@@ -2,7 +2,7 @@
   "name": "restaurant",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -22,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "json-server": "^1.0.0-beta.3",
     "node-fetch": "^3.3.2"
   }
 }
