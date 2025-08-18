@@ -1,2 +1,2 @@
 # 🍽️  Restaurant 🍴
-## Food Lover
+## Food Lover with Telegram Bot
