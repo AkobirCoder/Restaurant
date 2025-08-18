@@ -10,14 +10,14 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/send-message', async (req, res) => {
-    const {name, phone} = req.body;
+    const { name, phone } = req.body;
     const token = process.env.TELEGRAM_TOKEN_BOT;
     const chatId = process.env.CHAT_ID;
 
     try {
-        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 chat_id: chatId,
                 text: `Fullname: ${name}, Phone number: ${phone}`,
@@ -30,10 +30,10 @@ app.post('/send-message', async (req, res) => {
             throw new Error(data.description);
         }
 
-        res.json({status: 'success', message: 'Thanks for contacting with us'});
+        res.json({ status: 'success', message: 'Thanks for contacting with us' });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({status: 'error', message: 'Something went wrong!'});
+        console.error(error);
+        res.status(500).json({ status: 'error', message: 'Something went wrong!' });
     }
 });
 
