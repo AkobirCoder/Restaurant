@@ -1,0 +1,28 @@
+{
+    "specialOffers": [
+        {
+            "src": "./img/offer1.png",
+            "alt": "Quattro Pasta",
+            "title": "Quattro Pasta",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
+            "discount": 55,
+            "sale": 25
+        },
+        {
+            "src": "./img/offer2.png",
+            "alt": "Vegertarian Pasta",
+            "title": "Vegertarian Pasta",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
+            "discount": 65,
+            "sale": 35
+        },
+        {
+            "src": "./img/offer3.png",
+            "alt": "Gluten-Free Pasta",
+            "title": "Gluten-Free Pasta",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
+            "discount": 35,
+            "sale": 15
+        }
+    ]
+}
