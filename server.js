@@ -32,8 +32,8 @@ app.post('/send-message', async (req, res) => {
 
         res.json({ status: 'success', message: 'Thanks for contacting with us' });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ status: 'error', message: 'Something went wrong!' });
+        console.error("Telegram API error:", error.message);
+        res.status(500).json({ status: 'error', message: error.message });
     }
 });
 
