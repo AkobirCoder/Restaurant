@@ -2,7 +2,7 @@
   "name": "restaurant",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -11,8 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/AkobirCoder/Restaurant.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Akobir Usmonov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AkobirCoder/Restaurant/issues"
