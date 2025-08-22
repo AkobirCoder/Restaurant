@@ -2,8 +2,8 @@
     "specialMenuItems": [
         {
             "src": "./img/food1.png",
-            "alt": "LASAL Cheese",
-            "title": "LASAL Cheese",
+            "alt": "LASAL CHEESE",
+            "title": "LASAL CHEESE",
             "price": 18,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-left"

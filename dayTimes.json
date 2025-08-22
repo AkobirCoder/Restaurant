@@ -15,7 +15,7 @@
             "endTime": 19
         },
         {
-            "src": "../img/dinnerIcon.png",
+            "src": "./img/dinnerIcon.png",
             "alt": "Dinner",
             "title": "Dinner",
             "startTime": 21,
