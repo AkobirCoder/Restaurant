@@ -12,11 +12,3 @@ It includes pages for menu, special offers, and contact information.
 
 ### Status
 This project is private and currently under development.  
-
-# Hi, I’m Ismingiz
-## A Full-Stack Developer from Uzbekistan
-I enjoy building modern and scalable web applications. Always hungry to learn and improve!
-
-###  Languages & Tools
-![JavaScript logo](...) ![React logo](...) ![Node.js logo](...)
-
