@@ -1354,7 +1354,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		function closeModal() {
 			modal.classList.add('hide');
 			modal.classList.remove('show');
-			modalContent.classList.remove('modal__content');
+			modalContent.classList.remove('modal__fade');
 			document.body.style.overflow = '';
 		}
 
