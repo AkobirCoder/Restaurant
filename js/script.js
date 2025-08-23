@@ -1499,7 +1499,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				offset += +width.slice(0, width.length - 2);
 			}
 
-			slidesInner.style.transform = `translate(-${offset}px)`;
+			slidesInner.style.transform = `translateX(-${offset}px)`;
 
 			if (slideIndex === slides.length) {
 				slideIndex = 1;
@@ -1521,7 +1521,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				offset -= +width.slice(0, width.length - 2);
 			}
 
-			slidesInner.style.transform = `translate(-${offset}px)`;
+			slidesInner.style.transform = `translateX(-${offset}px)`;
 
 			if (slideIndex === 1) {
 				slideIndex = slides.length;
