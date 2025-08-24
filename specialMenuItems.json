@@ -2,10 +2,10 @@
     "specialMenuItems": [
         {
             "src": "./img/food1.png",
-            "alt": "LASAL CHEESE",
-            "title": "LASAL CHEESE",
+            "alt": "LASAL Cheese",
+            "title": "LASAL Cheese",
             "price": 18,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-left"
         },
         {
@@ -13,7 +13,7 @@
             "alt": "JUMBO CRAB SHRIMP",
             "title": "JUMBO CRAB SHRIMP",
             "price": 24,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-left"
         },
         {
@@ -21,7 +21,7 @@
             "alt": "KOKTAIL JUCIE",
             "title": "KOKTAIL JUCIE",
             "price": 12,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-left"
         },
         {
@@ -29,7 +29,7 @@
             "alt": "CAPO STEAK",
             "title": "CAPO STEAK",
             "price": 60,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-left"
         },
         {
@@ -37,7 +37,7 @@
             "alt": "ORGANIC FRUIT SALAD",
             "title": "ORGANIC FRUIT SALAD",
             "price": 8,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-left"
         },
         {
@@ -45,23 +45,23 @@
             "alt": "CHEESE PIZZA",
             "title": "CHEESE PIZZA",
             "price": 18,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-left"
         },
         {
             "src": "./img/food7.jpeg",
-            "alt": "KOFTA MEAT",
-            "title": "KOFTA MEAT",
-            "price": 40,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "alt": "CHEESE PIZZA",
+            "title": "CHEESE PIZZA",
+            "price": 18,
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-right"
         },
         {
             "src": "./img/food8.jpeg",
-            "alt": "SPANISH PIES",
-            "title": "SPANISH PIES",
-            "price": 14,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "alt": "KOFTA MEAT",
+            "title": "KOFTA MEAT",
+            "price": 40,
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-right"
         },
         {
@@ -69,7 +69,7 @@
             "alt": "CHEESE TOST",
             "title": "CHEESE TOST",
             "price": 6,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-right"
         },
         {
@@ -77,7 +77,7 @@
             "alt": "FRUIT SALAD",
             "title": "FRUIT SALAD",
             "price": 14,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-right"
         },
         {
@@ -85,7 +85,7 @@
             "alt": "CHICKEN SHAWARMA",
             "title": "CHICKEN SHAWARMA",
             "price": 20,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-right"
         },
         {
@@ -93,7 +93,7 @@
             "alt": "MEGA CHEESE PIZZA",
             "title": "MEGA CHEESE PIZZA",
             "price": 30,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
+            "descr": "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.",
             "parentSelector": ".menu-items-right"
         }
     ]
