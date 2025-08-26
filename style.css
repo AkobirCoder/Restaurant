@@ -869,12 +869,12 @@ form button {
 	display: none !important;
 }
 
-.fade {
-	animation-name: fade;
+.tab__fade {
+	animation-name: tab__fade;
 	animation-duration: 1.5s;
 }
 
-@keyframes fade {
+@keyframes tab__fade {
 	from {
 		opacity: 0.1;
 	}
