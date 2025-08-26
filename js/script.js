@@ -1,29 +1,27 @@
-// Bismillahir rohmanir rohim...
-
 window.addEventListener('DOMContentLoaded', () => {
 
 	// Tabs:
 
-	function __tabs() {
+	function __Tabs() {
 		const tabs = document.querySelectorAll('.tabheader__item'),
 			tabsContents = document.querySelectorAll('.tab_content'),
 			tabsParent = document.querySelector('.tabheader__items');
 
 		function hideTabContents() {
+			tabs.forEach(tab => {
+				tab.classList.remove('tabheader__item_active');
+			});
+
 			tabsContents.forEach(tabsContent => {
 				tabsContent.classList.add('hide');
 				tabsContent.classList.remove('show');
 			});
-
-			tabs.forEach(tab => {
-				tab.classList.remove('tabheader__item_active');
-			});
 		}
 
 		function showTabContent(index = 0) {
-			tabsContents[index].classList.add('show', 'fade');
-			tabsContents[index].classList.remove('hide');
 			tabs[index].classList.add('tabheader__item_active');
+			tabsContents[index].classList.add('show', 'tab__fade');
+			tabsContents[index].classList.remove('hide');
 		}
 
 		tabsParent.addEventListener('click', event => {
@@ -45,12 +43,12 @@ window.addEventListener('DOMContentLoaded', () => {
 		showTabContent();
 	}
 
-	__tabs();
+	__Tabs();
 
 
 	// Loader:
 
-	function __laoder() {
+	function __Loader() {
 		const loaderWrapper = document.querySelector('.loader-wrapper');
 
 		setTimeout(loader, 1000);
@@ -60,16 +58,16 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	__laoder();
+	__Loader();
 
 
 	// Timer:
 
-	function __timer() {
-		const finalDate = '2025-09-01';
+	function __TImer() {
+		const deadline = '2025-09-01';
 
-		function getTimeRemainer(endtime) {
-			const time = Date.parse(endtime) - Date.parse(new Date());
+		function getTimeRemainer(endTime) {
+			const time = Date.parse(endTime) - Date.parse(new Date());
 
 			let days, hours, minutes, seconds;
 
@@ -87,10 +85,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			return {
 				totalTime: time,
-				days: days,
-				hours: hours,
-				minutes: minutes,
-				seconds: seconds,
+				days,
+				hours,
+				minutes,
+				seconds,
 			}
 		}
 
@@ -102,18 +100,18 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		function setClock(selector, endtime) {
+		function setClock(selector, endTime) {
 			const timer = document.querySelector(selector),
 				days = timer.querySelector('#days'),
 				hours = timer.querySelector('#hours'),
 				minutes = timer.querySelector('#minutes'),
-				seconds =timer.querySelector('#seconds'),
+				seconds = timer.querySelector('#seconds'),
 				timeIntervalId = setInterval(updateClock, 1000);
 
 			updateClock();
 
 			function updateClock() {
-				const time = getTimeRemainer(endtime);
+				const time = getTimeRemainer(endTime);
 
 				days.textContent = formatTimeDigit(time.days);
 				hours.textContent = formatTimeDigit(time.hours);
@@ -126,15 +124,15 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		setClock('.timer', finalDate);
+		setClock('.timer', deadline);
 	}
 
-	__timer();
+	__TImer();
 
 
 	// Class:
 
-	function __class() {
+	function __Class() {
 
 		// Class - SpecialOffer:
 
@@ -143,7 +141,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				src,
 				alt,
 				title,
-				descr,
+				description,
 				discount,
 				sale,
 				parentSelector
@@ -151,26 +149,26 @@ window.addEventListener('DOMContentLoaded', () => {
 				this.src = src;
 				this.alt = alt;
 				this.title = title;
-				this.descr = descr;
+				this.description = description;
 				this.discount = discount;
 				this.sale = sale;
 				this.parentSelector = document.querySelector(parentSelector);
-				this.formatToEUR();
+				this.formatToUSD();
 			}
 
-			formatToEUR() {
-				this.discount = this.discount.toLocaleString('en-UK', {style: 'currency', currency: 'EUR'});
-				this.sale = this.sale.toLocaleString('en-UK', {style: 'currency', currency: 'EUR'});
+			formatToUSD() {
+				this.discount = this.discount.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+				this.sale = this.sale.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
 			}
 
 			render() {
 				const element = document.createElement('div');
 
 				element.innerHTML = `
-					<img src=${this.src} alt=${this.alt}>
+					<img src="${this.src}" alt="${this.alt}">
 					<div>
-					<h3>${this.title}</h3>
-						<p>${this.descr}</p>
+						<h3>${this.title}</h3>
+						<p>${this.description}</p>
 						<p><del>${this.discount}</del> <span class="primary-text">${this.sale}</span></p>
 					</div>
 				`;
@@ -184,39 +182,39 @@ window.addEventListener('DOMContentLoaded', () => {
 				src: './img/offer1.png',
 				alt: 'Quattro Pasta',
 				title: 'Quattro Pasta',
-				descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
 				discount: 55,
-				sale: 25,
+				sale: 30,
 			},
 			{
-				src: './img/offer2.png',
+				src: './img/offer3.png',
 				alt: 'Vegertarian Pasta',
 				title: 'Vegertarian Pasta',
-				descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
 				discount: 65,
-				sale: 35,
+				sale: 40,
 			},
 			{
 				src: './img/offer3.png',
 				alt: 'Gluten-Free Pasta',
 				title: 'Gluten-Free Pasta',
-				descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
-				discount: 45,
-				sale: 15,
+				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+				discount: 35,
+				sale: 20,
 			},
 		];
 
 		specialOffers.forEach(specialOffer => {
-			const {src, alt, title, descr, discount, sale} = specialOffer;
+			const {src, alt, title, description, discount, sale} = specialOffer;
 
 			new SpecialOffer(
 				src,
 				alt,
 				title,
-				descr,
+				description,
 				discount,
 				sale,
-				'.offers-items'
+				'.offers-items',
 			).render();
 		});
 
@@ -231,13 +229,13 @@ window.addEventListener('DOMContentLoaded', () => {
 			return response.json();
 		}).then(data => {
 			data.forEach(specialOffer => {
-				const {src, alt, title, descr, discount, sale} = specialOffer;
+				const {src, alt, title, description, discount, sale} = specialOffer;
 
 				new SpecialOffer(
 					src,
 					alt,
 					title,
-					descr,
+					description,
 					discount,
 					sale,
 					'.offers-items'
@@ -254,20 +252,20 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt,
 				title,
 				price,
-				descr,
+				description,
 				parentSelector
 			) {
 				this.src = src;
 				this.alt = alt;
 				this.title = title;
 				this.price = price;
-				this.descr = descr;
+				this.description = description;
 				this.parentSelector = document.querySelector(parentSelector);
-				this.formatToEUR();
+				this.formatToUSD();
 			}
 
-			formatToEUR() {
-				this.price = this.price.toLocaleString('uz-UK', {style:'currency', currency: 'EUR'});
+			formatToUSD() {
+				this.price = this.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
 			}
 
 			render() {
@@ -276,10 +274,10 @@ window.addEventListener('DOMContentLoaded', () => {
 				element.classList.add('menu-item');
 
 				element.innerHTML = `
-					<img src=${this.src} alt=${this.alt}>
+					<img src="${this.src}" alt="${this.alt}">
 					<div>
 						<h3>${this.title} <span class="primary-text">${this.price}</span></h3>
-						<p>${this.descr}</p>
+						<p>${this.description}</p>
 					</div>
 				`;
 
@@ -293,7 +291,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'LASAL Cheese',
 				title: 'LASAL Cheese',
 				price: 18,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -301,7 +299,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'JUMBO CRAB SHRIMP',
 				title: 'JUMBO CRAB SHRIMP',
 				price: 24,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -309,7 +307,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'KOKTAIL JUCIE',
 				title: 'KOKTAIL JUCIE',
 				price: 12,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -317,7 +315,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CAPO STEAK',
 				title: 'CAPO STEAK',
 				price: 60,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -325,7 +323,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'ORGANIC FRUIT SALAD',
 				title: 'ORGANIC FRUIT SALAD',
 				price: 8,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -333,23 +331,23 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CHEESE PIZZA',
 				title: 'CHEESE PIZZA',
 				price: 18,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
 				src: './img/food7.jpeg',
-				alt: 'CHEESE PIZZA',
-				title: 'CHEESE PIZZA',
-				price: 18,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				alt: 'KOFTA MEAT',
+				title: 'KOFTA MEAT',
+				price: 40,
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
 				src: './img/food8.jpeg',
-				alt: 'KOFTA MEAT',
-				title: 'KOFTA MEAT',
-				price: 40,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				alt: 'SPANISH PIES',
+				title: 'SPANISH PIES',
+				price: 14,
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -357,7 +355,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CHEESE TOST',
 				title: 'CHEESE TOST',
 				price: 6,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -365,7 +363,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'FRUIT SALAD',
 				title: 'FRUIT SALAD',
 				price: 14,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -373,7 +371,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CHICKEN SHAWARMA',
 				title: 'CHICKEN SHAWARMA',
 				price: 20,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -381,21 +379,21 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'MEGA CHEESE PIZZA',
 				title: 'MEGA CHEESE PIZZA',
 				price: 30,
-				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 		];
 
 		specialMenuItems.forEach(specialMenuItem => {
-			const {src, alt, title, price, descr, parentSelector} = specialMenuItem;
+			const {src, alt, title, price, description, parentSelector} = specialMenuItem
 
 			new SpecialMenu(
 				src,
 				alt,
 				title,
 				price,
-				descr,
-				parentSelector,
+				description,
+				parentSelector
 			).render();
 		});
 
@@ -410,15 +408,15 @@ window.addEventListener('DOMContentLoaded', () => {
 			return response.json();
 		}).then(data => {
 			data.forEach(specialMenuItem => {
-				const {src, alt, title, price, descr, parentSelector} = specialMenuItem;
+				const {src, alt, title, price, description, parentSelector} = specialMenuItem
 
 				new SpecialMenu(
 					src,
 					alt,
 					title,
 					price,
-					descr,
-					parentSelector,
+					description,
+					parentSelector
 				).render();
 			});
 		});
@@ -431,17 +429,17 @@ window.addEventListener('DOMContentLoaded', () => {
 				src,
 				alt,
 				title,
-				descr,
 				startTime,
 				endTime,
+				description,
 				parentSelector
 			) {
 				this.src = src;
 				this.alt = alt;
 				this.title = title;
-				this.descr = descr;
 				this.startTime = startTime;
 				this.endTime = endTime;
+				this.description = description;
 				this.parentSelector = document.querySelector(parentSelector);
 				this.formatTime();
 			}
@@ -451,28 +449,27 @@ window.addEventListener('DOMContentLoaded', () => {
 					return '';
 				}
 
-				const period = hour >= 12 ? 'pm' : 'am';
-
-				const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+				const period = hour >= 12 ? 'pm' : 'am',
+					formattedHour = hour % 12 === 0 ? 12 : hour % 12;
 
 				return `${formattedHour}:00 ${period}`;
 			}
 
 			render() {
+				const element = document.createElement('div');
+
 				let timeText;
 
-				if (this.descr) {
-					timeText = this.descr;
+				if (this.description) {
+					timeText = this.description;
 				} else {
 					timeText = `${this.formatTime(this.startTime)} to ${this.formatTime(this.endTime)}`;
 				}
 
-				const element = document.createElement('div');
-
 				element.classList.add('daytime-item');
 
 				element.innerHTML = `
-					<img src=${this.src} alt=${this.alt}>
+					<img src="${this.src}" alt="${this.alt}">
 					<h3>${this.title}</h3>
 					<p>${timeText}</p>
 				`;
@@ -481,9 +478,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		const dayTimeItems = [
+		const dayTimes = [
 			{
-				src: './img/breckfastIcon.png',
+				src: './img/breakfastIcon.png',
 				alt: 'Breakfast',
 				title: 'Breakfast',
 				startTime: 8,
@@ -507,58 +504,57 @@ window.addEventListener('DOMContentLoaded', () => {
 				src: './img/dessertIcon.png',
 				alt: 'Dessert',
 				title: 'Dessert',
-				descr: 'All day',
+				description: 'All day',
 			},
 		];
 
-		dayTimeItems.forEach(dayTimeItem => {
-			const {src, alt, title, descr, startTime, endTime} = dayTimeItem;
+		dayTimes.forEach(daytime => {
+			const {src, alt, title, startTime, endTime, description} = daytime;
 
 			new DayTime(
 				src,
 				alt,
 				title,
-				descr,
 				startTime,
 				endTime,
-				'.daytime-items',
+				description,
+				'.daytime-items'
 			).render();
 		});
 
-		// dayTimesItems - Port: 3015
+		// dayTimes - Port: 3015
 
-		const dayTimeItems__URL = 'http://localhost:3015/dayTimeItems';
+		const dayTimes__URL = 'http://localhost:3015/dayTimes';
 
-		fetch(dayTimeItems__URL, {
+		fetch(dayTimes__URL, {
 			method: 'GET',
 			headers: {'Content-Type': 'application/json'},
 		}).then(response => {
 			return response.json();
 		}).then(data => {
-			data.forEach(dayTimeItem => {
-				const {src, alt, title, descr, startTime, endTime} = dayTimeItem;
+			data.forEach(daytime => {
+				const {src, alt, title, startTime, endTime, description} = daytime;
 
 				new DayTime(
 					src,
 					alt,
 					title,
-					descr,
 					startTime,
 					endTime,
-					'.daytime-items',
+					description,
+					'.daytime-items'
 				).render();
 			});
 		});
 	}
 
-	__class();
+	__Class();
 
 
 	// Modal && Form:
 
-	function __modal__form() {
-
-
+	function __Modal__Form() {
+		
 		// Modal:
 
 		const modal = document.querySelector('.modal'),
@@ -581,7 +577,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			modal.classList.add('hide');
 			modal.classList.remove('show');
 			modalContent.classList.remove('modal__fade');
-			document.body.style.overflow = 'visible';
+			document.body.style.overflow = '';
 		}
 
 		modal.addEventListener('click', event => {
@@ -608,7 +604,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const form = document.querySelector('form');
 
 		const message = {
-			loading: 'Loading',
+			loading: 'Loading...',
 			success: 'Thanks for contacting with us',
 			failure: 'Something went wrong',
 		}
@@ -686,12 +682,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	__modal__form();
-
+	__Modal__Form();
 
 	// Slider:
 
-	function __slider() {
+	function __Slider() {
 		const slides = document.querySelectorAll('.offer__slide'),
 			prev = document.querySelector('.offer__slider-prev'),
 			next = document.querySelector('.offer__slider-next'),
@@ -766,6 +761,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	__slider();
-	
+	__Slider();
+
 });
