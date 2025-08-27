@@ -1,0 +1,31 @@
+{
+    "dayTimeItems": [
+        {
+            "src": "./img/breakfastIcon.png",
+            "alt": "Breakfast",
+            "title": "Breakfast",
+            "startTime": 8,
+            "endTime": 10
+        },
+        {
+            "src": "./img/lunchIcon.png",
+            "alt": "Lunch",
+            "title": "Lunch",
+            "startTime": 16,
+            "endTime": 19
+        },
+        {
+            "src": "./img/dinnerIcon.png",
+            "alt": "Dinner",
+            "title": "Dinner",
+            "startTime": 21,
+            "endTime": 1
+        },
+        {
+            "src": "./img/dessertIcon.png",
+            "alt": "Dessert",
+            "title": "Dessert",
+            "descr": "All day"
+        }
+    ]
+}
