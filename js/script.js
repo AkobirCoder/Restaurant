@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// Timer:
 
-	function __TImer() {
+	function __Timer() {
 		const deadline = '2025-09-01';
 
 		function getTimeRemainer(endTime) {
@@ -100,8 +100,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		function setClock(selector, endTime) {
-			const timer = document.querySelector(selector),
+		function setClock(parentSelector, endTime) {
+			const timer = document.querySelector(parentSelector),
 				days = timer.querySelector('#days'),
 				hours = timer.querySelector('#hours'),
 				minutes = timer.querySelector('#minutes'),
@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		setClock('.timer', deadline);
 	}
 
-	__TImer();
+	__Timer();
 
 
 	// Class:
@@ -141,7 +141,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				src,
 				alt,
 				title,
-				description,
+				descr,
 				discount,
 				sale,
 				parentSelector
@@ -149,95 +149,96 @@ window.addEventListener('DOMContentLoaded', () => {
 				this.src = src;
 				this.alt = alt;
 				this.title = title;
-				this.description = description;
+				this.descr = descr;
 				this.discount = discount;
 				this.sale = sale;
 				this.parentSelector = document.querySelector(parentSelector);
-				this.formatToUSD();
+				this.formatToEUR();
 			}
 
-			formatToUSD() {
-				this.discount = this.discount.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
-				this.sale = this.sale.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+			formatToEUR() {
+				this.discount = this.discount.toLocaleString('en-UK', {
+					style: 'currency', currency: 'EUR'
+				});
+
+				this.sale = this.sale.toLocaleString('en-UK', {
+					style: 'currency', currency: 'EUR'
+				});
 			}
 
 			render() {
-				const element = document.createElement('div');
+				const offerItem = document.createElement('div');
 
-				element.innerHTML = `
-					<img src="${this.src}" alt="${this.alt}">
+				offerItem.innerHTML = `
+					<img src=${this.src} alt=${this.alt}>
 					<div>
 						<h3>${this.title}</h3>
-						<p>${this.description}</p>
+						<p>${this.descr}</p>
 						<p><del>${this.discount}</del> <span class="primary-text">${this.sale}</span></p>
 					</div>
 				`;
 
-				this.parentSelector.append(element);
+				this.parentSelector.append(offerItem);
 			}
 		}
 
-		const specialOffers = [
+		const specialOfferItems = [
 			{
 				src: './img/offer1.png',
 				alt: 'Quattro Pasta',
 				title: 'Quattro Pasta',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+				descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
 				discount: 55,
-				sale: 30,
+				sale: 25,
 			},
 			{
-				src: './img/offer3.png',
+				src: './img/offer2.png',
 				alt: 'Vegertarian Pasta',
 				title: 'Vegertarian Pasta',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+				descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
 				discount: 65,
-				sale: 40,
+				sale: 35,
 			},
 			{
 				src: './img/offer3.png',
 				alt: 'Gluten-Free Pasta',
 				title: 'Gluten-Free Pasta',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
+				descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.',
 				discount: 35,
-				sale: 20,
+				sale: 15,
 			},
 		];
 
-		specialOffers.forEach(specialOffer => {
-			const {src, alt, title, description, discount, sale} = specialOffer;
-
+		specialOfferItems.forEach(specialOfferItem => {
 			new SpecialOffer(
-				src,
-				alt,
-				title,
-				description,
-				discount,
-				sale,
-				'.offers-items',
+				specialOfferItem.src,
+				specialOfferItem.alt,
+				specialOfferItem.title,
+				specialOfferItem.descr,
+				specialOfferItem.discount,
+				specialOfferItem.sale,
+				'.offers-items'
 			).render();
 		});
 
-		// specialOffers - Port: 3013
+		// specialOfferItems - Port: 3013
 
-		const specialOffers__URL = 'http://localhost:3013/specialOffers';
+		const specialOfferItems__URL = 'http://localhost:3013/specialOfferItems';
 
-		fetch(specialOffers__URL, {
+		fetch(specialOfferItems__URL, {
 			method: 'GET',
-			headers: {'Content-Type': 'application/json'},
-		}).then(response => {
-			return response.json();
-		}).then(data => {
-			data.forEach(specialOffer => {
-				const {src, alt, title, description, discount, sale} = specialOffer;
-
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}).then(response => response.json()).then(data => {
+			data.forEach(specialOfferItem => {
 				new SpecialOffer(
-					src,
-					alt,
-					title,
-					description,
-					discount,
-					sale,
+					specialOfferItem.src,
+					specialOfferItem.alt,
+					specialOfferItem.title,
+					specialOfferItem.descr,
+					specialOfferItem.discount,
+					specialOfferItem.sale,
 					'.offers-items'
 				).render();
 			});
@@ -252,46 +253,48 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt,
 				title,
 				price,
-				description,
+				descr,
 				parentSelector
 			) {
 				this.src = src;
 				this.alt = alt;
 				this.title = title;
 				this.price = price;
-				this.description = description;
+				this.descr = descr;
 				this.parentSelector = document.querySelector(parentSelector);
-				this.formatToUSD();
+				this.formatToEUR();
 			}
 
-			formatToUSD() {
-				this.price = this.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+			formatToEUR() {
+				this.price = this.price.toLocaleString('en-UK', {
+					style: 'currency', currency: 'EUR'
+				});
 			}
 
 			render() {
-				const element = document.createElement('div');
+				const menuItem = document.createElement('div');
 
-				element.classList.add('menu-item');
+				menuItem.classList.add('menu-item');
 
-				element.innerHTML = `
-					<img src="${this.src}" alt="${this.alt}">
+				menuItem.innerHTML = `
+					<img src=${this.src} alt=${this.alt}>
 					<div>
 						<h3>${this.title} <span class="primary-text">${this.price}</span></h3>
-						<p>${this.description}</p>
+						<p>${this.descr}</p>
 					</div>
 				`;
 
-				this.parentSelector.append(element);
+				this.parentSelector.append(menuItem);
 			}
 		}
 
 		const specialMenuItems = [
 			{
 				src: './img/food1.png',
-				alt: 'LASAL Cheese',
-				title: 'LASAL Cheese',
+				alt: 'LASAL CHEESE',
+				title: 'LASAL CHEESE',
 				price: 18,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -299,7 +302,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'JUMBO CRAB SHRIMP',
 				title: 'JUMBO CRAB SHRIMP',
 				price: 24,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -307,7 +310,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'KOKTAIL JUCIE',
 				title: 'KOKTAIL JUCIE',
 				price: 12,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -315,7 +318,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CAPO STEAK',
 				title: 'CAPO STEAK',
 				price: 60,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -323,7 +326,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'ORGANIC FRUIT SALAD',
 				title: 'ORGANIC FRUIT SALAD',
 				price: 8,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -331,7 +334,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CHEESE PIZZA',
 				title: 'CHEESE PIZZA',
 				price: 18,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-left',
 			},
 			{
@@ -339,7 +342,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'KOFTA MEAT',
 				title: 'KOFTA MEAT',
 				price: 40,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -347,7 +350,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'SPANISH PIES',
 				title: 'SPANISH PIES',
 				price: 14,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -355,7 +358,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CHEESE TOST',
 				title: 'CHEESE TOST',
 				price: 6,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -363,7 +366,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'FRUIT SALAD',
 				title: 'FRUIT SALAD',
 				price: 14,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -371,7 +374,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'CHICKEN SHAWARMA',
 				title: 'CHICKEN SHAWARMA',
 				price: 20,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 			{
@@ -379,21 +382,19 @@ window.addEventListener('DOMContentLoaded', () => {
 				alt: 'MEGA CHEESE PIZZA',
 				title: 'MEGA CHEESE PIZZA',
 				price: 30,
-				description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
+				descr: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At, explicabo.',
 				parentSelector: '.menu-items-right',
 			},
 		];
 
 		specialMenuItems.forEach(specialMenuItem => {
-			const {src, alt, title, price, description, parentSelector} = specialMenuItem
-
 			new SpecialMenu(
-				src,
-				alt,
-				title,
-				price,
-				description,
-				parentSelector
+				specialMenuItem.src,
+				specialMenuItem.alt,
+				specialMenuItem.title,
+				specialMenuItem.price,
+				specialMenuItem.descr,
+				specialMenuItem.parentSelector
 			).render();
 		});
 
@@ -403,20 +404,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		fetch(specialMenuItems__URL, {
 			method: 'GET',
-			headers: {'Content-Type': 'application/json'},
-		}).then(response => {
-			return response.json();
-		}).then(data => {
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		}).then(response => response.json()).then(data => {
 			data.forEach(specialMenuItem => {
-				const {src, alt, title, price, description, parentSelector} = specialMenuItem
-
 				new SpecialMenu(
-					src,
-					alt,
-					title,
-					price,
-					description,
-					parentSelector
+					specialMenuItem.src,
+					specialMenuItem.alt,
+					specialMenuItem.title,
+					specialMenuItem.price,
+					specialMenuItem.descr,
+					specialMenuItem.parentSelector
 				).render();
 			});
 		});
@@ -431,7 +430,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				title,
 				startTime,
 				endTime,
-				description,
+				descr,
 				parentSelector
 			) {
 				this.src = src;
@@ -439,9 +438,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				this.title = title;
 				this.startTime = startTime;
 				this.endTime = endTime;
-				this.description = description;
+				this.descr = descr;
 				this.parentSelector = document.querySelector(parentSelector);
-				this.formatTime();
 			}
 
 			formatTime(hour) {
@@ -456,29 +454,29 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 
 			render() {
-				const element = document.createElement('div');
-
 				let timeText;
 
-				if (this.description) {
-					timeText = this.description;
+				if (this.descr) {
+					timeText = this.descr;
 				} else {
 					timeText = `${this.formatTime(this.startTime)} to ${this.formatTime(this.endTime)}`;
 				}
 
-				element.classList.add('daytime-item');
+				const dayTimeItem = document.createElement('div');
 
-				element.innerHTML = `
-					<img src="${this.src}" alt="${this.alt}">
+				dayTimeItem.classList.add('daytime-item');
+
+				dayTimeItem.innerHTML = `
+					<img src=${this.src} alt=${this.alt}>
 					<h3>${this.title}</h3>
 					<p>${timeText}</p>
 				`;
 
-				this.parentSelector.append(element);
+				this.parentSelector.append(dayTimeItem);
 			}
 		}
 
-		const dayTimes = [
+		const dayTimeItems = [
 			{
 				src: './img/breakfastIcon.png',
 				alt: 'Breakfast',
@@ -504,44 +502,40 @@ window.addEventListener('DOMContentLoaded', () => {
 				src: './img/dessertIcon.png',
 				alt: 'Dessert',
 				title: 'Dessert',
-				description: 'All day',
+				descr: 'All day',
 			},
 		];
 
-		dayTimes.forEach(daytime => {
-			const {src, alt, title, startTime, endTime, description} = daytime;
-
+		dayTimeItems.forEach(dayTimeItem => {
 			new DayTime(
-				src,
-				alt,
-				title,
-				startTime,
-				endTime,
-				description,
+				dayTimeItem.src,
+				dayTimeItem.alt,
+				dayTimeItem.title,
+				dayTimeItem.startTime,
+				dayTimeItem.endTime,
+				dayTimeItem.descr,
 				'.daytime-items'
 			).render();
 		});
 
-		// dayTimes - Port: 3015
+		// dayTimeItems - Port: 3015
 
-		const dayTimes__URL = 'http://localhost:3015/dayTimes';
+		const dayTimeItems__URL = 'http://localhost:3015/dayTimeItems';
 
-		fetch(dayTimes__URL, {
+		fetch(dayTimeItems__URL, {
 			method: 'GET',
-			headers: {'Content-Type': 'application/json'},
-		}).then(response => {
-			return response.json();
-		}).then(data => {
-			data.forEach(daytime => {
-				const {src, alt, title, startTime, endTime, description} = daytime;
-
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		}).then(response => response.json()).then(data => {
+			data.forEach(dayTimeItem => {
 				new DayTime(
-					src,
-					alt,
-					title,
-					startTime,
-					endTime,
-					description,
+					dayTimeItem.src,
+					dayTimeItem.alt,
+					dayTimeItem.title,
+					dayTimeItem.startTime,
+					dayTimeItem.endTime,
+					dayTimeItem.descr,
 					'.daytime-items'
 				).render();
 			});
@@ -554,7 +548,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	// Modal && Form:
 
 	function __Modal__Form() {
-		
+
 		// Modal:
 
 		const modal = document.querySelector('.modal'),
@@ -577,7 +571,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			modal.classList.add('hide');
 			modal.classList.remove('show');
 			modalContent.classList.remove('modal__fade');
-			document.body.style.overflow = '';
+			document.body.style.overflow = 'visible';
 		}
 
 		modal.addEventListener('click', event => {
@@ -601,88 +595,92 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		// Form:
 
-		const form = document.querySelector('form');
+		function __Form() {
+			const form = document.querySelector('form');
 
-		const message = {
-			loading: 'Loading...',
-			success: 'Thanks for contacting with us',
-			failure: 'Something went wrong',
-		}
+			const message = {
+				loading: 'Loading',
+				success: 'Thanks for contacting with us',
+				failure: 'Something went wrong',
+			}
 
-		form.addEventListener('submit', event => {
-			event.preventDefault();
+			form.addEventListener('submit', event => {
+				event.preventDefault();
 
-			const loader = document.createElement('div');
+				const loader = document.createElement('div');
 
-			loader.classList.add('loader');
-			loader.style.width = '1.25rem';
-			loader.style.height = '1.25rem';
-			loader.style.marginTop = '1.25rem';
+				loader.classList.add('loader');
+				loader.style.width = '1.25rem';
+				loader.style.height = '1.25rem';
+				loader.style.marginTop = '1.25rem';
 
-			form.append(loader);
+				form.append(loader);
 
-			const formData = new FormData(form);
+				const formData = new FormData(form);
 
-			const formObject = {}
+				const object = {}
 
-			formData.forEach((value, key) => {
-				formObject[key] = value;
+				formData.forEach((value, key) => {
+					object[key] = value;
+				});
+
+				fetch('http://localhost:5000/send-message', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(object),
+				}).then(() => {
+					setTimeout(() => {
+						showStatusMessage(message.success);
+						form.reset();
+					}, 1000);
+				}).catch(() => {
+					setTimeout(() => {
+						showStatusMessage(message.failure);
+					}, 1000);
+				}).finally(() => {
+					setTimeout(() => {
+						loader.remove();
+					}, 2000);
+				});
 			});
 
-			fetch('http://localhost:5000/send-message', {
-				method: 'POST',
-				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify(formObject),
-			})
-			.then(() => {
+			function showStatusMessage(message) {
+				const modalDialog = document.querySelector('.modal__dialog');
+
+				modalDialog.classList.add('hide');
+
+				openModal();
+
+				const statusModal = document.createElement('div');
+
+				statusModal.classList.add('modal__dialog');
+
+				statusModal.innerHTML = `
+					<div class="modal__content">
+						<div data-modal-close class="modal__close">&times;</div>
+						<div class="modal__title">${message}</div>
+					</div>
+				`;
+
+				document.querySelector('.modal').append(statusModal);
+
 				setTimeout(() => {
-					showStatusMessage(message.success);
-					form.reset();
-				}, 1000);
-			})
-			.catch(() => {
-				setTimeout(() => {
-					showStatusMessage(message.failure);
-				}, 1000);
-			})
-			.finally(() => {
-				setTimeout(() => {
-					loader.remove();
-				}, 2000);
-			});
-		});
+					statusModal.remove();
 
-		function showStatusMessage(message) {
-			const modalDialog = document.querySelector('.modal__dialog');
+					modalDialog.classList.remove('hide');
 
-			modalDialog.classList.add('hide');
-
-			openModal();
-
-			const statusModal = document.createElement('div');
-
-			statusModal.classList.add('modal__dialog');
-
-			statusModal.innerHTML = `
-				<div class="modal__content">
-					<div data-modal-close class="modal__close">&times;</div>
-					<div class="modal__title">${message}</div>
-				</div>
-			`;
-
-			document.querySelector('.modal').append(statusModal);
-
-			setTimeout(() => {
-				statusModal.remove();
-
-				modalDialog.classList.remove('hide');
-
-				closeModal();
-			}, 3000);
+					closeModal();
+				}, 3000);
+			}
 		}
+
+		__Form();
 	}
 
 	__Modal__Form();
+
 
 	// Slider:
 
@@ -692,9 +690,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			next = document.querySelector('.offer__slider-next'),
 			total = document.querySelector('#total'),
 			current = document.querySelector('#current'),
-			slidesWrapper = document.querySelector('.offer__slider-wrapper'),
 			slidesInner = document.querySelector('.offer__slider-inner'),
-			width = window.getComputedStyle(slidesWrapper).width;
+			slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+			width = getComputedStyle(slidesWrapper).width;
 
 		let slideIndex = 1,
 			offset = 0;
@@ -709,7 +707,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		slidesInner.style.width = 100 * slides.length + '%';
 		slidesInner.style.display = 'flex';
-		slidesInner.style.transition = 'all 0.5s ease';
+		slidesInner.style.transition = 'all 0.3s ease';
 		slidesWrapper.style.overflow = 'hidden';
 
 		slides.forEach(slide => {
