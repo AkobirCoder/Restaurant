@@ -6,17 +6,13 @@ export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs}"],
     languageOptions: {
-      sourceType: "module",   // Hamma fayl uchun import/export ishlaydi
-      globals: globals.browser,
+      sourceType: "module", // import/export ishlaydi
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
     plugins: { js },
     extends: ["js/recommended"],
-  },
-  {
-    files: ["server-*.js"],
-    languageOptions: {
-      sourceType: "module",   // commonjs emas, modul sifatida ishlatamiz
-      globals: globals.node,
-    },
   },
 ]);
