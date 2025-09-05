@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "This is a private project for a restaurant website.   It includes pages for menu, special offers, and contact information.",
   "main": "server-bot.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server-bot.js"
@@ -29,6 +28,8 @@
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "eslint": "^9.34.0",
-    "globals": "^16.3.0"
+    "globals": "^16.3.0",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
   }
 }
