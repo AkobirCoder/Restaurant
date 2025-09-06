@@ -94,22 +94,6 @@ function __Class(specialOfferSelector, dayTimeSelector) {
         ).render();
     });
 
-    getResources().then(data => {
-        data.forEach(specialOffer => {
-            const {src, alt, title, descr, discount, sale} = specialOffer;
-
-            new SpecialOffer(
-                src,
-                alt,
-                title,
-                descr,
-                discount,
-                sale,
-                '.offers-items'
-            ).render();
-        });
-    });
-
     // specialOffers - Port: 3013
 
     // const specialOffers__URL = 'http://localhost:3013/specialOffers';
@@ -136,6 +120,22 @@ function __Class(specialOfferSelector, dayTimeSelector) {
     //         ).render();
     //     });
     // });
+
+    getResources().then(data => {
+        data.forEach(specialOffer => {
+            const {src, alt, title, descr, discount, sale} = specialOffer;
+
+            new SpecialOffer(
+                src,
+                alt,
+                title,
+                descr,
+                discount,
+                sale,
+                '.offers-items'
+            ).render();
+        });
+    });
 
 
     // Class - SpecialMenu:
