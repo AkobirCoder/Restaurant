@@ -1,5 +1,5 @@
-function __Loader() {
-    const loaderWrapper = document.querySelector('.loader-wrapper');
+function __Loader(loaderSelector) {
+    const loaderWrapper = document.querySelector(loaderSelector);
 
     setTimeout(() => {
         loaderWrapper.style.display = 'none';
