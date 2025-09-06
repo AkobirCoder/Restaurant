@@ -109,22 +109,6 @@ function __Class(specialOfferSelector, dayTimeSelector) {
         ).render();
     });
 
-    (0,_services_get_resources__WEBPACK_IMPORTED_MODULE_0__["default"])().then(data => {
-        data.forEach(specialOffer => {
-            const {src, alt, title, descr, discount, sale} = specialOffer;
-
-            new SpecialOffer(
-                src,
-                alt,
-                title,
-                descr,
-                discount,
-                sale,
-                '.offers-items'
-            ).render();
-        });
-    });
-
     // specialOffers - Port: 3013
 
     // const specialOffers__URL = 'http://localhost:3013/specialOffers';
@@ -151,6 +135,22 @@ function __Class(specialOfferSelector, dayTimeSelector) {
     //         ).render();
     //     });
     // });
+
+    (0,_services_get_resources__WEBPACK_IMPORTED_MODULE_0__["default"])().then(data => {
+        data.forEach(specialOffer => {
+            const {src, alt, title, descr, discount, sale} = specialOffer;
+
+            new SpecialOffer(
+                src,
+                alt,
+                title,
+                descr,
+                discount,
+                sale,
+                '.offers-items'
+            ).render();
+        });
+    });
 
 
     // Class - SpecialMenu:
@@ -1814,6 +1814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 window.addEventListener('DOMContentLoaded', () => {
     const modalOpenTimerId = setInterval(() => (0,_modules_modal__WEBPACK_IMPORTED_MODULE_4__.openModal)('.modal', '.modal__content', modalOpenTimerId), 5000);
+    
 
     // Tabs:
 
