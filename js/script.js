@@ -795,6 +795,7 @@ import { openModal } from "./modules/modal";
 
 window.addEventListener('DOMContentLoaded', () => {
     const modalOpenTimerId = setInterval(() => openModal('.modal', '.modal__content', modalOpenTimerId), 5000);
+    
 
     // Tabs:
 
