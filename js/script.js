@@ -929,7 +929,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // __Timer();
 
-    __Timer('2025-09-08', '.timer');
+    __Timer('2025-09-10', '.timer');
 
 
     // Class: 
