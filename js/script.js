@@ -824,4 +824,44 @@
 // });
 
 
+"use strict"
 
+import __Tabs from "./modules/tabs";
+import __Loader from "./modules/loader";
+import __Timer from "./modules/timer";
+import __Class from "./modules/class";
+import __Modal__Form from "./modules/modal_form";
+import __Slider from "./modules/slider";
+
+window.addEventListener('DOMContentLoaded', () => {
+
+    // Tabs:
+
+    __Tabs();
+
+
+    // Loader:
+
+    __Loader();
+
+
+    // Timer:
+
+    __Timer();
+
+
+    // Class:
+
+    __Class();
+
+
+    // Modal__Form:
+
+    __Modal__Form();
+
+
+    // Slider:
+
+    __Slider();
+
+});
