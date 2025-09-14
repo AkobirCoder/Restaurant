@@ -1,4 +1,11 @@
-function __Class() {
+// import getResources from "../services/get-resources";
+import {
+    loadSpecialOffers, 
+    loadSpecialMenuItems, 
+    loadDataTimes
+} from "../services/get-resources";
+
+function __Class(specialOffersParentSelector, dayTimesParentSelector) {
     // Class - SpecialOffer:
 
     class SpecialOffer {
@@ -86,7 +93,8 @@ function __Class() {
             descr,
             discount,
             sale,
-            '.offers-items'
+            // '.offers-items'
+            specialOffersParentSelector
         ).render();
     });
 
@@ -113,10 +121,33 @@ function __Class() {
                 descr,
                 discount,
                 sale,
-                '.offers-items'
+                // '.offers-items'
+                specialOffersParentSelector
             ).render();
         });
     });
+
+
+    // specialOffers - try/catch:
+
+    // getResources().then(data => {
+    //     data.forEach(specialOffer => {
+    //         const {src, alt, title, descr, discount, sale} = specialOffer;
+
+    //         new SpecialOffer(
+    //             src,
+    //             alt,
+    //             title,
+    //             descr,
+    //             discount,
+    //             sale,
+    //             // '.offers-items'
+    //             specialOffersParentSelector
+    //         ).render();
+    //     });
+    // });
+
+    loadSpecialOffers(SpecialOffer, specialOffersParentSelector);
     
     
     // Class - SpecialMenu:
@@ -302,6 +333,8 @@ function __Class() {
         });
     });
 
+    loadSpecialMenuItems(SpecialMenu);
+
 
     // Class - DayTime:
 
@@ -398,7 +431,8 @@ function __Class() {
             startTime,
             endTime,
             descr,
-            '.daytime-items'
+            // '.daytime-items'
+            dayTimesParentSelector
         ).render();
     });
 
@@ -425,10 +459,13 @@ function __Class() {
                 startTime,
                 endTime,
                 descr,
-                '.daytime-items'
+                // '.daytime-items'
+                dayTimesParentSelector
             ).render();
         });
     });
+
+    loadDataTimes(DayTime ,dayTimesParentSelector);
 }
 
 export default __Class;
