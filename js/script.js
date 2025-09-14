@@ -830,34 +830,43 @@ import __Tabs from "./modules/tabs";
 import __Loader from "./modules/loader";
 import __Timer from "./modules/timer";
 import __Class from "./modules/class";
-import __Modal__Form from "./modules/modal_form";
+import __Modal from "./modules/modal";
+import { openModal } from "./modules/modal";
+import __Form from "./modules/form";
 import __Slider from "./modules/slider";
 
 window.addEventListener('DOMContentLoaded', () => {
 
+    const modalOpenTimerId = setInterval(() => openModal('.modal', '.modal__content', modalOpenTimerId), 5000);
+
     // Tabs:
 
-    __Tabs();
+    __Tabs('.tabheader__item', '.tab_content', '.tabheader__items');
 
 
     // Loader:
 
-    __Loader();
+    __Loader('.loader-wrapper');
 
 
     // Timer:
 
-    __Timer();
+    __Timer('2025-12-31', '.timer');
 
 
     // Class:
 
-    __Class();
+    __Class('.offers-items', '.daytime-items');
 
 
-    // Modal__Form:
+    // Modal:
 
-    __Modal__Form();
+    __Modal('.modal', '.modal__content', '[data-modal]', modalOpenTimerId);
+
+
+    // Form:
+
+    __Form('form', modalOpenTimerId);
 
 
     // Slider:
