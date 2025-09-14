@@ -1,5 +1,5 @@
-function __Timer() {
-    const deadline = '2025-12-31';
+function __Timer(deadline, timerSelector) {
+    // const deadline = '2025-12-31';
 
     function getTimeRemainer(endDate) {
         const time = Date.parse(endDate) - Date.parse(new Date());
@@ -57,7 +57,7 @@ function __Timer() {
         }
     }
 
-    setClock('.timer', deadline);
+    setClock(timerSelector, deadline);
 }
 
 export default __Timer;
